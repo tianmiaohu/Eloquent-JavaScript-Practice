@@ -26,3 +26,17 @@ console.log(typeof (typeof undefined));
 // -> string
 console.log(typeof null);
 // -> object
+var arr = [2, 3];
+arr["new prop"] = "new value";
+console.log("new prop" in arr);
+// -> true
+console.log(arr["new prop"]);
+// -> new value
+function checkArgs() {
+  console.log(typeof arguments);
+}
+checkArgs();
+// -> object
+var bad;
+console.log(bad == undefined);
+// -> true
