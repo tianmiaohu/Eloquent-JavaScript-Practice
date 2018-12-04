@@ -40,3 +40,6 @@ checkArgs();
 var bad;
 console.log(bad == undefined);
 // -> true
+bad = null;
+console.log(bad == null);
+// -> true

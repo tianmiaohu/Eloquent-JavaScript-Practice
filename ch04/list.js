@@ -1,18 +1,21 @@
 function arrayToList(data) {
   var list = {};
+  var curList = list;
   var rest = list;
   for(var i = 0; i < data.length; i++) {
-    rest.value = data[i];
-    rest.rest = {};
+    rest["value"] = data[i];
+    rest["rest"] = {};
+    curList = rest;
     rest = rest.rest;
   }
+  curList.rest = null;
   return list;
 }
 function listToArray(list, arr) {
   if(arr == undefined) {
     arr = [];
   }
-  if(list.rest == undefined) {
+  if(list == null) {
     return arr;
   } else {
     arr.push(list.value);
@@ -27,8 +30,8 @@ function nth(data, pos, curPos) {
   if(curPos == pos) {
     return data.value;
   } else {
-    if(data.rest == undefined) {
-      return undefined;
+    if(data.rest == null) {
+      return null;
     } else {
       return nth(data.rest, pos, ++curPos);
     }
@@ -39,6 +42,6 @@ console.log(arrayToList([1, 2, 3, 4, 5]));
 console.log(nth(arrayToList([1, 2, 3, 4, 5]), 10));
 // -> undefined
 console.log(nth(arrayToList([1, 2, 3, 4, 5]), 3));
-// -> undefined
+// -> 4
 console.log(listToArray(arrayToList([1, 2, 3, 4, 5])));
 // -> 1, 2, 3, 4, 5
