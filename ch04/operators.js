@@ -43,3 +43,5 @@ console.log(bad == undefined);
 bad = null;
 console.log(bad == null);
 // -> true
+console.log(typeof console.log);
+// -> function
