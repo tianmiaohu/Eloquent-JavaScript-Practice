@@ -13,7 +13,31 @@ console.log(some([NaN, 3, 4], isNaN));
 console.log(some([2, 3, 4], isNaN));
 // → false
 */
-var ancestry = JSON.parse(require("./ancestry.js"));
-//console.log("Output Type: \n"+ typeof ancestry);
-//console.log("Output Content : \n"+ ancestry);
-
+function every(arr, func) {
+  var result = true;
+  for(var ele in arr) {
+    if(! func(arr[ele])) {
+      result = false;
+      break;
+    }
+  }
+  return result;
+}
+function some(arr, func) {
+  var result = false;
+  for(var ele in arr) {
+    if(func(arr[ele])) {
+      result = true;
+      break;
+    }
+  }
+  return result;
+}
+console.log(every([NaN, NaN, NaN], isNaN));
+// → true
+console.log(every([NaN, NaN, 4], isNaN));
+// → false
+console.log(some([NaN, 3, 4], isNaN));
+// → true
+console.log(some([2, 3, 4], isNaN));
+// → false
