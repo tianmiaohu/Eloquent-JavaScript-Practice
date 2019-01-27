@@ -17,12 +17,12 @@ var byName = {};
 ancestry.forEach(function(person) {
   byName[person.name] = person;
 });
-//console.log(byName);
-var ageDiff = [];
-ancestry.forEach(function(person) {
+console.log(average(ancestry.map(person => {
   var mother = byName[person.mother];
   if(mother) {
-    ageDiff.push(person.born - mother.born);
+    return person.born - mother.born;
   }
-});
-console.log(average(ageDiff).toFixed(1));
+  return null;
+}).filter(
+  x => x != null
+)).toFixed(1));
