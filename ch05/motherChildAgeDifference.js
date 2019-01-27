@@ -7,8 +7,6 @@ Note that not all the mothers mentioned in the data are themselves present in th
 // → 31.2
  */
 var ancestry = JSON.parse(require("./ancestry.js"));
-//console.log("Output Type: \n"+ typeof ancestry);
-//console.log("Output Content : \n"+ ancestry);
 
 function average(array) {
   function plus(a, b) { return a + b; }
@@ -19,5 +17,12 @@ var byName = {};
 ancestry.forEach(function(person) {
   byName[person.name] = person;
 });
-
-console.log(byName);
+//console.log(byName);
+var ageDiff = [];
+ancestry.forEach(function(person) {
+  var mother = byName[person.mother];
+  if(mother) {
+    ageDiff.push(person.born - mother.born);
+  }
+});
+console.log(average(ageDiff).toFixed(1));
