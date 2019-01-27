@@ -14,21 +14,25 @@ For bonus points, write a function groupBy that abstracts the grouping operation
 //   21: 94
  */
 var ancestry = JSON.parse(require("./ancestry.js"));
-var centuryGroup = {};
-ancestry.forEach(function (person) {
-  var century = String(Math.ceil(person.died / 100));
-  if(! centuryGroup[century]) {
-    centuryGroup[century] = [person.died - person.born];
-  } else {
-    centuryGroup[century].push(person.died - person.born);
-  }
-});
+centuryGroup = groupBy(ancestry, function (member) {return String(Math.ceil(member.died / 100));});
 for(var century in centuryGroup) {
-  console.log(century + ": " + average(centuryGroup[century]).toFixed(1));
+  console.log(century + ": " + averageAge(centuryGroup[century]).toFixed(1));
 }
 
-function average(array) {
-  function plus(a, b) { return a + b; }
-  return array.reduce(plus) / array.length;
+function averageAge(group) {
+  function plus(a, b) { return a + b.died - b.born; }
+  return group.reduce(plus, 0) / group.length;
 }
 
+function groupBy(arr, getGroupName) {
+  var theGroup = {};
+  arr.forEach(function (member) {
+    var groupName = getGroupName(member);
+    if(! theGroup[groupName]) {
+      theGroup[groupName] = [member];
+    } else {
+      theGroup[groupName].push(member);
+    }
+  });
+  return theGroup;
+}
