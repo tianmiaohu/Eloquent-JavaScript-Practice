@@ -14,8 +14,18 @@ For bonus points, write a function groupBy that abstracts the grouping operation
 //   21: 94
  */
 var ancestry = JSON.parse(require("./ancestry.js"));
-//console.log("Output Type: \n"+ typeof ancestry);
-//console.log("Output Content : \n"+ ancestry);
+var centuryGroup = {};
+ancestry.forEach(function (person) {
+  var century = String(Math.ceil(person.died / 100));
+  if(! centuryGroup[century]) {
+    centuryGroup[century] = [person.died - person.born];
+  } else {
+    centuryGroup[century].push(person.died - person.born);
+  }
+});
+for(var century in centuryGroup) {
+  console.log(century + ": " + average(centuryGroup[century]).toFixed(1));
+}
 
 function average(array) {
   function plus(a, b) { return a + b; }
