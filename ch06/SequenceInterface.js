@@ -4,17 +4,71 @@
 When you have specified your interface, try to write a function logFive that takes a sequence object and calls console.log on its first five elements—or fewer, if the sequence has fewer than five elements.
 
 Then implement an object type ArraySeq that wraps an array and allows iteration over the array using the interface you designed. Implement another object type RangeSeq that iterates over a range of integers (taking from and to arguments to its constructor) instead.
-
-// Your code here.
-
-logFive(new ArraySeq([1, 2]));
+*/
+/*Interface
+ first: moves to the first element
+ hasMore: are there any more elements
+ next: next element
+ */
+function logFive(seq) {
+  var count = 0;
+  seq.first();
+  while((count < 5) && seq.hasMore()) {
+    count++;
+    console.log(seq.next());
+  }
+}
+var ArraySeq = function(arr) {
+  this.data = arr;
+  this.dataIndex = 0;
+};
+ArraySeq.prototype.first = function() {
+  this.dataIndex = 0;
+};
+ArraySeq.prototype.hasMore = function() {
+  var more = false;
+  if(this.data.length > this.dataIndex) {
+    more = true;
+  }
+  return more;
+};
+ArraySeq.prototype.next = function() {
+  var ele = undefined;
+  if(this.hasMore()) {
+    ele = this.data[this.dataIndex];
+    this.dataIndex++;
+  }
+  return ele;
+};
+var RangeSeq = function(begin, end) {
+  this.begin = begin;
+  this.end = end;
+  this.dataIndex = 0;
+};
+RangeSeq.prototype.first = function() {
+  this.dataIndex = 0;
+};
+RangeSeq.prototype.hasMore = function() {
+  var more = false;
+  if((this.end - this.begin) >= this.dataIndex) {
+    more = true;
+  }
+  return more;
+};
+RangeSeq.prototype.next = function() {
+  var ele = undefined;
+  if(this.hasMore()) {
+    ele = this.begin + this.dataIndex;
+    this.dataIndex++;
+  }
+  return ele;
+};
+logFive(new ArraySeq([1, 2, 3, 4, 5, 6]));
 // → 1
 // → 2
-logFive(new RangeSeq(100, 1000));
+logFive(new RangeSeq(100, 103));
 // → 100
 // → 101
 // → 102
 // → 103
 // → 104
-*/
-
