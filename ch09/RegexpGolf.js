@@ -22,31 +22,32 @@ Refer to the table in the chapter summary for help. Test each solution with a fe
 
 // Fill in the regular expressions
 
-verify(/.../,
+*/
+verify(/ ca/,
        ["my car", "bad cats"],
        ["camper", "high art"]);
 
-verify(/.../,
+verify(/op./,
        ["pop culture", "mad props"],
        ["plop"]);
 
-verify(/.../,
+verify(/[tyi]$/,
        ["ferret", "ferry", "ferrari"],
        ["ferrum", "transfer A"]);
 
-verify(/.../,
+verify(/^[hs]/,
        ["how delicious", "spacious room"],
        ["ruinous", "consciousness"]);
 
-verify(/.../,
+verify(/\./,
        ["bad punctuation ."],
        ["escape the dot"]);
 
-verify(/.../,
+verify(/^[h][^ ]+$/,
        ["hottentottententen"],
        ["no", "hotten totten tenten"]);
 
-verify(/.../,
+verify(/^[rw]/,
        ["red platypus", "wobbling nest"],
        ["earth bed", "learning ape"]);
 
@@ -63,4 +64,3 @@ function verify(regexp, yes, no) {
       console.log("Unexpected match for '" + s + "'");
   });
 }
-*/
